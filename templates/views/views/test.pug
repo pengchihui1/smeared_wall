@@ -1,0 +1,18 @@
+extends ../default
+
+block content
+    .container
+        .card
+            .card-content.blue.lighten-4
+                .col.s12.center
+                    canvas(id='drawArea' width='600' height='600').white
+                .col.s12.center
+                    .btn.blue.waves-effect.waves-light
+                        #eraseBtn 擦除
+                .col.s12.center
+                    h5#result
+
+
+block javascript
+    script(src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js")
+    script(src='/js/action.js')
