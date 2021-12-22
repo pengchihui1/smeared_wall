@@ -1,0 +1,10 @@
+door
+ladder
+microphone
+cloud
+t-shirt
+flower
+triangle
+sun
+bicycle
+apple
