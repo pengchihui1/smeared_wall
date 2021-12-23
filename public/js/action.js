@@ -10,7 +10,6 @@ async function start() {
 
     // 模型
     model = await tf.loadLayersModel('model/model.json');
-    model.summary();
     // const pred = model.predict(tf.zeros([1, 28, 28, 1]))
     // console.log(pred.dataSync())
 }

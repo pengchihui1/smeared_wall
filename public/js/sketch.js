@@ -5,6 +5,7 @@ let model;
 let cnv;
 
 async function loadMyModel() {
+  // 在await该模型关键字等待浏览器加载
   model = await tf.loadLayersModel('model/model.json');
   model.summary();
   console.log(model)
@@ -15,7 +16,7 @@ function setup() {
 
   cnv = createCanvas(400, 400);
   background(255);
-  cnv.mouseReleased(guess);
+  cnv.mouseReleased(guess);//鼠标释放
   cnv.parent('canvasContainer');
 
   let guessButton = select('#guess');
@@ -31,10 +32,10 @@ function setup() {
 function guess() {
   // Get input image from the canvas
   const inputs = getInputImage();
-
-  // Predict
+ 
+  // Predict 将返回形状的概率[N, 100]
   let guess = model.predict(tf.tensor([inputs]));
-  console.log(guess)
+
   // Format res to an array
   const rawProb = Array.from(guess.dataSync());
 
@@ -46,9 +47,9 @@ function guess() {
     }
   });
 
-  const sortProb = rawProbWIndex.sort((a, b) => b.probability - a.probability);
-  const topKClassWIndex = sortProb.slice(0, k);
-  const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
+  const sortProb = rawProbWIndex.sort((a, b) => b.probability - a.probability);//概率排序
+  const topKClassWIndex = sortProb.slice(0, k);//拿取最高概率的10个
+  const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);//前几个名及百分比
   select('#res').html(`I see: ${topKRes.toString()}`);
 }
 
@@ -74,10 +75,10 @@ function getInputImage() {
   return inputs;
 }
 
-function draw() {
-  strokeWeight(10);
-  stroke(0);
-  if (mouseIsPressed) {
-    line(pmouseX, pmouseY, mouseX, mouseY);
-  }
-}
+// function draw() {
+//   strokeWeight(10); // 行程重量
+//   stroke(0);
+//   if (mouseIsPressed) { //鼠标按下
+//     line(pmouseX, pmouseY, mouseX, mouseY);
+//   }
+// }
